@@ -13,10 +13,12 @@
     // else if user reached page via POST (as by submitting a form via POST)
     else if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
+        //check if empty
          if (empty($_POST["username"]))
         {
             apologize("You must provide your username.");
         }
+        //check if password empty
         else if (empty($_POST["password"]))
         {
             apologize("You must provide your password.");
@@ -35,12 +37,7 @@
         }
          //$favteam = query("UPDATE users SET favteam = ? where id = ?", $_POST["favteam"],$_SESSION["id"]);
         $query = query("INSERT INTO users (username, hash, favteam,email) VALUES(?, ?,?,?)", $_POST["username"], crypt($_POST["password"]),$_POST["favteam"],$_POST["email"]);
-        $message = "Welcome to the draft!";
-        $subject = "The draft";
-        $to = $_POST["email"];
-        $from = "draft@thedraftisgo.com";
-       mail($to, $subject, $message,"From:($from)");
-
+       
         if($query ===false)
         {
          apologize("Username already exists");
