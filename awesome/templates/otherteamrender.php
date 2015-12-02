@@ -20,12 +20,16 @@ $(document).ready(function(){
      $('#otherteam td').each(function(){
     var playervalue = $(this).attr("value");   
     console.log(playervalue);
+      if( playervalue === 'none'){
+    $(this).html('No Players in team');
+    }
+    else{
   var playerinfo = $('#draft tr[value="'+$(this).attr("value")+'"]').children("td").eq(0).html();
      var playerpos = $('#draft tr[value="'+$(this).attr("value")+'"]').children("td").eq(1).html();
       var playerteam = $('#draft tr[value="'+$(this).attr("value")+'"]').children("td").eq(3).html();
      console.log(playerinfo);
      $(this).html('<td>'+playerinfo+'<td>'+playerpos+'<td>'+playerteam);
-    
+    }
  });
   
    $('#otherteam th').each(function(){
@@ -51,12 +55,16 @@ $(document).ready(function(){
    $('#myteam td').each(function(){
     var playervalue = $(this).attr("value");   
     console.log(playervalue);
+      if( playervalue === 'none'){
+    $(this).html('No Players in team');
+    }
+    else{
      var playerinfo = $('#draft tr[value="'+$(this).attr("value")+'"]').children("td").eq(0).html();
      var playerpos = $('#draft tr[value="'+$(this).attr("value")+'"]').children("td").eq(1).html();
       var playerteam = $('#draft tr[value="'+$(this).attr("value")+'"]').children("td").eq(3).html();
      console.log(playerinfo);
      $(this).html('<td>'+playerinfo+'<td>'+playerpos+'<td>'+playerteam);
-    
+    }
  });
    $('#draft').hide();
    $('#myteam th').each(function(){
@@ -82,115 +90,56 @@ $(document).ready(function(){
 
 
 
-<table id ="otherteam" class = "myteam" >  
+  
+
+ 
+
+
+<table id ="otherteam" class ="myteam" >
+   <caption> <?php echo ucfirst($teamid) ?>'s team </caption>
  <thead>
     <tr>
     <th value = "0"></th>
      </tr>
-  </thead>
-  <tbody>
-  <tr><?php echo $teamid ?>'s team 
-     <td value ="<?= $otherpositions[0] ?>" ></td>
-      
-      
+  </thead> 
+  <?php if(!empty($otherpositions[0])):  ?>
+    <?php foreach ($otherpositions as $otherposition): ?>
+        <tr>
+     <td class = "myteam"value ="<?php echo htmlspecialchars($otherposition); ?>"  ></td>
      </tr>
-      <tr>
-     <td value ="<?= $otherpositions[1] ?>" ></td>
-      
-      
-     </tr>
-      <tr>
-     <td value ="<?= $otherpositions[2] ?>" ></td>
-      
-      
-     </tr>
-      <tr>
-    <td value ="<?= $otherpositions[3] ?>" ></td>
-      
-      
-     </tr>
-      <tr>
-     <td value ="<?= $otherpositions[4] ?>" ></td>
-      
-      
-     </tr>
-      <tr>
-     <td value ="<?= $otherpositions[5] ?>" ></td>
-      
-      
-     </tr>
-      <tr>
-   <td value ="<?= $otherpositions[6] ?>" ></td>
-      
-      
-     </tr>
-      <tr>
-    <td value ="<?= $otherpositions[7] ?>" ></td>
-      
-      
-     </tr>
-      <tr>
-     <td value ="<?= $otherpositions[8] ?>" ></td>
-      
-      
-     </tr>
-    </tbody>
+     
+    <?php endforeach ?>
+      <?php else: ?>
+                <tr>
+                    <td value = "none" >No players in team</td>
+                </tr>
+    <?php endif ?>
+    
 </table>
 
 
-<table id ="myteam" class = "myteam" >
+
+
+<table id ="myteam" class ="myteam" >
+  <caption>My Team</caption>
  <thead>
-    <tr>MY TEAM
+    <tr>
     <th value = "0"></th>
      </tr>
-  </thead>
-  <tbody>
-  <tr>
-     <td value ="<?= $positions[0] ?>" ></td>
-      
-      
+  </thead> 
+  <?php if(!empty($positions[0])):  ?>
+    <?php foreach ($positions as $position): ?>
+        <tr>
+     <td class = "myteam"value ="<?php echo htmlspecialchars($position); ?>"  ></td>
      </tr>
-      <tr>
-     <td value ="<?= $positions[1] ?>" ></td>
-      
-      
-     </tr>
-      <tr>
-     <td value ="<?= $positions[2] ?>" ></td>
-      
-      
-     </tr>
-      <tr>
-    <td value ="<?= $positions[3] ?>" ></td>
-      
-      
-     </tr>
-      <tr>
-     <td value ="<?= $positions[4] ?>" ></td>
-      
-      
-     </tr>
-      <tr>
-     <td value ="<?= $positions[5] ?>" ></td>
-      
-      
-     </tr>
-      <tr>
-   <td value ="<?= $positions[6] ?>" ></td>
-      
-      
-     </tr>
-      <tr>
-    <td value ="<?= $positions[7] ?>" ></td>
-      
-      
-     </tr>
-      <tr>
-     <td value ="<?= $positions[8] ?>" ></td>
-      
-      
-     </tr>
-    </tbody>
+     
+    <?php endforeach ?>
+      <?php else: ?>
+                <tr>
+                    <td value = "none" >No players in team</td>
+                </tr>
+    <?php endif ?>
+    
 </table>
 
 
